@@ -1,0 +1,15 @@
+name: NoMoreCombatLog
+version: '1.0.1'
+main: org.mikrowellentoast.NoMoreCombatLog.NoMoreCombatLog
+api-version: '1.21'
+
+permissions:
+    nomorecombatlog.use:
+      description: Allows use of the AntiCombatLog command
+      default: op
+    nomorecombatlog.reload:
+        description: Allows reloading of the AntiCombatLog configuration
+        default: op
+    nomorecombatlog.bypass:
+        description: Allows bypassing combat logging
+        default: false

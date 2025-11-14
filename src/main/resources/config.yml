@@ -1,0 +1,5 @@
+enabled : true # Enable or disable the plugin
+
+combat-tag-duration: 30 # Duration in seconds for how long a player is in combat after being hit or hitting another player
+
+enable-in-creative: false # Whether to enable combat logging in creative mode
