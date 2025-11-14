@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
-    //implementation("dev.jorel:commandapi-paper-shade:11.0.0")
+    implementation("dev.jorel:commandapi-paper-shade:11.0.0")
 }
 
 tasks {
@@ -32,13 +32,13 @@ tasks {
     }
 }
 
-/*tasks.named('shadowJar') {
+tasks.named('shadowJar') {
     archiveBaseName.set('NoMoreCombatLog')
     archiveVersion.set('1.0.1')
 
 
     relocate("dev.jorel.commandapi", "org.mikrowellentoast.NoMoreCombatLog.libs.commandapi")
-}*/
+}
 
 
 def targetJavaVersion = 21
