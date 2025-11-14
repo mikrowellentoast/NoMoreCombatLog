@@ -2,7 +2,6 @@ package org.mikrowellentoast.NoMoreCombatLog.commands;
 
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import org.mikrowellentoast.NoMoreCombatLog.NoMoreCombatLog;

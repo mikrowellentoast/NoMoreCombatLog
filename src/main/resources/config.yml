@@ -3,3 +3,6 @@ enabled : true # Enable or disable the plugin
 combat-tag-duration: 30 # Duration in seconds for how long a player is in combat after being hit or hitting another player
 
 enable-in-creative: false # Whether to enable combat logging in creative mode
+
+retaliationattack: false # Enable combat tag only on retaliation attacks
+retaliationattack-duration: 10 # Duration in seconds for retaliation attack window (only if retaliationattack is true)

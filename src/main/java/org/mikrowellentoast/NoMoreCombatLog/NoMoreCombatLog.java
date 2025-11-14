@@ -27,8 +27,6 @@ public class NoMoreCombatLog extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
 
-        //CommandAPI.onEnable();
-
 
         try {
             FileConfiguration defaults = YamlConfiguration.loadConfiguration(

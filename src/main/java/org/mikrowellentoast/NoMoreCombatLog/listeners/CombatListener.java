@@ -20,17 +20,32 @@ import java.util.UUID;
 public class CombatListener implements Listener {
 
     private final HashMap<UUID, Long> combatTagged = new HashMap<>();
+    private final HashMap<UUID, retaliationdata> retaliationMap = new HashMap<>();
     private final NoMoreCombatLog plugin = NoMoreCombatLog.getInstance();
     private long COMBAT_TAG_DURATION;
     private boolean ENABLED_IN_CREATIVE;
     private boolean PLUGIN_ENABLED;
+    private boolean RETALIATION_ONLY;
+    private long RETALIATION_WINDOW;
     private int taskId = -1;
 
     public CombatListener() {
        this.COMBAT_TAG_DURATION = plugin.getConfig().getLong("combat-tag-duration", 15) * 1000;
        this.ENABLED_IN_CREATIVE = plugin.getConfig().getBoolean("enable-in-creative", false);
        this.PLUGIN_ENABLED = plugin.getConfig().getBoolean("enabled", true);
+       this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
+       this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
        startActionbarTask();
+    }
+
+    private static class retaliationdata {
+        UUID attacker;
+        long timestamp;
+
+        retaliationdata(UUID attacker, long timestamp) {
+            this.attacker = attacker;
+            this.timestamp = timestamp;
+        }
     }
 
 
@@ -40,27 +55,39 @@ public class CombatListener implements Listener {
             return;
         }
 
-        if (event.getEntity() instanceof Player victim && event.getDamager() instanceof Player attacker) {
-            long now = System.currentTimeMillis();
-            GameMode victimMode = victim.getGameMode();
-            GameMode attackerMode = attacker.getGameMode();
-            if (!victim.hasPermission("nomorecombatlog.bypass")) {
-                if (!ENABLED_IN_CREATIVE && victimMode == GameMode.CREATIVE) {
-                    return;
-                }
-                combatTagged.put(victim.getUniqueId(), now);
-            }
-            if (!attacker.hasPermission("nomorecombatlog.bypass")) {
-
-                if (!ENABLED_IN_CREATIVE && attackerMode == GameMode.CREATIVE) {
-                    return;
-                }
-                combatTagged.put(attacker.getUniqueId(), now);
-
-
-
-            }
+        if(!(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Player attacker)) {
+            return;
         }
+
+        if (victim.hasPermission("nomorecombatlog.bypass") || attacker.hasPermission("nomorecombatlog.bypass")) {
+            return;
+        }
+
+        if (!ENABLED_IN_CREATIVE && (victim.getGameMode() == GameMode.CREATIVE || attacker.getGameMode() == GameMode.CREATIVE)) {
+            return;
+        }
+
+        long now = System.currentTimeMillis();
+
+        if (RETALIATION_ONLY) {
+
+            retaliationMap.put(attacker.getUniqueId(), new retaliationdata(victim.getUniqueId(), now));
+            retaliationdata data = retaliationMap.get(victim.getUniqueId());
+            if (data != null && data.attacker.equals(attacker.getUniqueId())) {
+
+                if (now - data.timestamp <= RETALIATION_WINDOW) {
+                    combatTagged.put(victim.getUniqueId(), now);
+                    combatTagged.put(attacker.getUniqueId(), now);
+                }
+
+                retaliationMap.remove(victim.getUniqueId());
+            }
+
+        } else {
+            combatTagged.put(victim.getUniqueId(), now);
+            combatTagged.put(attacker.getUniqueId(), now);
+        }
+
     }
 
     @EventHandler
@@ -90,6 +117,8 @@ public class CombatListener implements Listener {
         this.COMBAT_TAG_DURATION = plugin.getConfig().getLong("combat-tag-duration", 15) * 1000;
         this.ENABLED_IN_CREATIVE = plugin.getConfig().getBoolean("enable-in-creative", false);
         this.PLUGIN_ENABLED = plugin.getConfig().getBoolean("enabled", true);
+        this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
+        this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
         startActionbarTask();
     }
 
