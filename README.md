@@ -15,8 +15,7 @@ A simple and configurable Paper plugin that prevents players from combat logging
 - Configurable to allow or disallow tagging in creative mode.
 
 ### Retaliation Mode (optional)
-- Tag only applies if the victim retaliates within a time window.
-- Optional feature allowing more flexible PvP rules.
+- Tag only when player is attacked and attacks back within a configurable time window.
 
 ---
 
