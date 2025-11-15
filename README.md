@@ -12,13 +12,11 @@ A simple and configurable Paper plugin that prevents players from combat logging
 
 ### Combat Logging Prevention
 - If a tagged player logs out before the timer ends, they are automatically killed.
+- Players can be prevented from using portals while in combat.
 
 ### Retaliation Mode (optional)
 - Tag only applies if the victim retaliates within a time window.
 - Optional feature allowing more flexible PvP rules.
-
-### Portal Restrictions
-- Players can be prevented from using portals while in combat.
 
 ---
 
