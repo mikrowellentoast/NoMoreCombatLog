@@ -15,3 +15,6 @@ blocked-commands: #List of commands that are disabled during combat (without sla
   - "spawn"
   - "warp"
   - "tpa"
+
+punishment-method: kill # Punishment for combat logging: 'kill' or 'ban'
+ban-duration: 1440 # Duration in minutes for temporary bans (only if punishment-method is 'ban') (1440 minutes = 24 hours) (set to -1 for permanent ban)

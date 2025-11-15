@@ -12,11 +12,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.mikrowellentoast.NoMoreCombatLog.events.ConfigReloadEvent;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
-import java.util.Set;
+import java.time.Duration;
+import java.util.*;
 
 public class CombatListener implements Listener {
 
@@ -29,6 +26,8 @@ public class CombatListener implements Listener {
     private boolean RETALIATION_ONLY;
     private long RETALIATION_WINDOW;
     private boolean SET_ATTACKER_ON_COMBAT_ON_RETALIATION;
+    private String punishmentMethod;
+    private long banDuration;
     private int taskId = -1;
 
 
@@ -40,7 +39,8 @@ public class CombatListener implements Listener {
        this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
        this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
        this.SET_ATTACKER_ON_COMBAT_ON_RETALIATION = plugin.getConfig().getBoolean("set-attacker-on-combat", true);
-
+       this.punishmentMethod = plugin.getConfig().getString("punishment-method", "kill");
+       this.banDuration = plugin.getConfig().getLong("ban-duration", 1440);
        startActionbarTask();
     }
 
@@ -125,7 +125,20 @@ public class CombatListener implements Listener {
         long duration = COMBAT_TAG_DURATION;
         if (lastTagged != null && now - lastTagged < duration) {
             combatTagged.remove(player.getUniqueId());
-            player.setHealth(0);
+            if (punishmentMethod.equalsIgnoreCase("kill")) {
+                player.setHealth(0.0);
+            } else if (punishmentMethod.equalsIgnoreCase("ban")) {
+                String reason = "You have been banned for combat logging.";
+                player.setHealth(0.0);
+                if (banDuration <= 0) {
+                    player.ban("You have been banned for combat logging.", (Date) null, null, true);
+                } else {
+                    long banMillis = System.currentTimeMillis() + (banDuration * 60 * 1000);
+                    Date banDate = new Date(banMillis);
+                    player.ban("You have been banned for combat logging.",banDate, null, true);
+                }
+
+            }
         }
     }
 
@@ -138,6 +151,8 @@ public class CombatListener implements Listener {
         this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
         this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
         this.SET_ATTACKER_ON_COMBAT_ON_RETALIATION = plugin.getConfig().getBoolean("set-attacker-on-combat", true);
+        this.punishmentMethod = plugin.getConfig().getString("punishment-method", "kill");
+        this.banDuration = plugin.getConfig().getLong("ban-duration", 1440);
         startActionbarTask();
     }
 
