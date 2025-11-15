@@ -30,7 +30,7 @@ A simple and configurable Paper plugin that prevents players from combat logging
 
 ## Configuration
 
-Everything is controlled through the `config.yml` file:
+Everything can be changed in the `config.yml` file:
 
 ```yaml
 enabled: true                    # Enable or disable the plugin
@@ -66,3 +66,4 @@ More features soon
 - more punishments for combat logging
 - support for other server types (Spigot)
 - keep track of combat loggers across server restarts
+- Disable usage of specified commands
