@@ -1,6 +1,5 @@
 # NoMoreCombatLog
-A simple and configurable Paper plugin that prevents players from combat logging.  
-When players try to escape combat by logging out or using portals, this plugin enforces fair gameplay by tagging players during combat and punishing unfair logouts.
+A simple and configurable Paper plugin that prevents players from combat logging.
 
 ---
 
@@ -10,7 +9,6 @@ When players try to escape combat by logging out or using portals, this plugin e
 - Players are placed in combat when attacking or being attacked.
 - The combat tag lasts for a configurable duration.
 - Actionbar messages show remaining tag time.
-- Tag clears automatically when time runs out or when a player dies.
 
 ### Combat Logging Prevention
 - If a tagged player logs out before the timer ends, they are automatically killed.
