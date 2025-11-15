@@ -9,7 +9,7 @@ A simple and configurable Paper plugin that prevents players from combat logging
 -  Players are placed in combat when attacking or being attacked.
 - The combat tag lasts for a configurable duration.
 - Actionbar messages show remaining tag time.
-- If a tagged player logs out before the timer ends, they are automatically killed.
+- If a tagged player logs out before the timer ends, they are automatically killed (can be changed to ban).
 - Players can be prevented from using portals while in combat.
 - Commands can be blocked during combat.
 - Configurable to allow or disallow tagging in creative mode.
