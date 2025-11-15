@@ -14,6 +14,7 @@ import org.mikrowellentoast.NoMoreCombatLog.listeners.PortalListener;
 import org.mikrowellentoast.NoMoreCombatLog.listeners.ReloadListener;
 //import org.mikrowellentoast.NoMoreCombatLog.commands.CommandRegister;
 
+import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
@@ -28,6 +29,8 @@ public class NoMoreCombatLog extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
+
+        checkAndUpdateConfig();
 
         try {
             FileConfiguration defaults = YamlConfiguration.loadConfiguration(
@@ -69,5 +72,48 @@ public class NoMoreCombatLog extends JavaPlugin {
     public void reloadPluginConfig() {
         instance.reloadConfig();
         Bukkit.getPluginManager().callEvent(new ConfigReloadEvent());
+    }
+
+    public void checkAndUpdateConfig() {
+        File configFile = new File(getDataFolder(), "config.yml");
+
+        FileConfiguration oldConfig = YamlConfiguration.loadConfiguration(configFile);
+
+        FileConfiguration newDefaults = YamlConfiguration.loadConfiguration(
+                new InputStreamReader(getResource("config.yml"), StandardCharsets.UTF_8)
+        );
+
+        boolean needsUpdate = false;
+                for (String key: newDefaults.getKeys(true)) {
+                    if (!oldConfig.contains(key)) {
+                        needsUpdate = true;
+                        getLogger().info("Updating config file");
+                    }
+                }
+
+                if (!needsUpdate) {
+                    return;
+                }
+
+                saveResource("config.yml", true);
+
+                FileConfiguration newConfig = YamlConfiguration.loadConfiguration(configFile);
+
+                for (String key: oldConfig.getKeys(true)) {
+                    if (newConfig.contains(key)) {
+                        newConfig.set(key, oldConfig.get(key));
+                    }
+                }
+
+                try {
+                    newConfig.save(configFile);
+                } catch (Exception e) {
+                    getLogger().warning("Failed to save updated config: " + e.getMessage());
+                }
+
+                reloadPluginConfig();
+                getLogger().info("Config file has been updated.");
+
+
     }
 }
