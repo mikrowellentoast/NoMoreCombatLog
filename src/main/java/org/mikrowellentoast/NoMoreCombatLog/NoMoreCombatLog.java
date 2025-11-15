@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.mikrowellentoast.NoMoreCombatLog.commands.CommandRegister_NMCL;
 import org.mikrowellentoast.NoMoreCombatLog.events.ConfigReloadEvent;
 import org.mikrowellentoast.NoMoreCombatLog.listeners.CombatListener;
+import org.mikrowellentoast.NoMoreCombatLog.listeners.CommandListener;
 import org.mikrowellentoast.NoMoreCombatLog.listeners.PortalListener;
 import org.mikrowellentoast.NoMoreCombatLog.listeners.ReloadListener;
 //import org.mikrowellentoast.NoMoreCombatLog.commands.CommandRegister;
@@ -44,6 +45,7 @@ public class NoMoreCombatLog extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(combatlistener, this);
         Bukkit.getPluginManager().registerEvents(new ReloadListener(), this);
         Bukkit.getPluginManager().registerEvents(new PortalListener(combatlistener), this);
+        Bukkit.getPluginManager().registerEvents(new CommandListener(combatlistener), this);
 
         CommandRegister_NMCL handler = new CommandRegister_NMCL(this);
 
