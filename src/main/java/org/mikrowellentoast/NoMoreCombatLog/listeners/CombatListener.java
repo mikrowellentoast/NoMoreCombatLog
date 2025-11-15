@@ -28,6 +28,7 @@ public class CombatListener implements Listener {
     private boolean PLUGIN_ENABLED;
     private boolean RETALIATION_ONLY;
     private long RETALIATION_WINDOW;
+    private boolean SET_ATTACKER_ON_COMBAT_ON_RETALIATION;
     private int taskId = -1;
 
 
@@ -38,6 +39,7 @@ public class CombatListener implements Listener {
        this.PLUGIN_ENABLED = plugin.getConfig().getBoolean("enabled", true);
        this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
        this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
+       this.SET_ATTACKER_ON_COMBAT_ON_RETALIATION = plugin.getConfig().getBoolean("set-attacker-on-combat", true);
 
        startActionbarTask();
     }
@@ -77,6 +79,10 @@ public class CombatListener implements Listener {
 
         long now = System.currentTimeMillis();
 
+        if (SET_ATTACKER_ON_COMBAT_ON_RETALIATION && RETALIATION_ONLY) {
+            combatTagged.put(attacker.getUniqueId(), now);
+        }
+
         if (RETALIATION_ONLY) {
 
             retaliationMap.put(attacker.getUniqueId(), new retaliationdata(victim.getUniqueId(), now));
@@ -85,7 +91,10 @@ public class CombatListener implements Listener {
 
                 if (now - data.timestamp <= RETALIATION_WINDOW) {
                     combatTagged.put(victim.getUniqueId(), now);
-                    combatTagged.put(attacker.getUniqueId(), now);
+
+                    if (!SET_ATTACKER_ON_COMBAT_ON_RETALIATION) {
+                        combatTagged.put(attacker.getUniqueId(), now);
+                    }
 
                 }
 
@@ -128,6 +137,7 @@ public class CombatListener implements Listener {
         this.PLUGIN_ENABLED = plugin.getConfig().getBoolean("enabled", true);
         this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
         this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
+        this.SET_ATTACKER_ON_COMBAT_ON_RETALIATION = plugin.getConfig().getBoolean("set-attacker-on-combat", true);
         startActionbarTask();
     }
 

@@ -28,7 +28,6 @@ public class NoMoreCombatLog extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
 
-
         try {
             FileConfiguration defaults = YamlConfiguration.loadConfiguration(
                     new InputStreamReader(getResource("config.yml"), StandardCharsets.UTF_8)
