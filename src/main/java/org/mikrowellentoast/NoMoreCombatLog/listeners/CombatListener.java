@@ -170,7 +170,7 @@ public class CombatListener implements Listener {
                     player.sendActionBar("§cCombat: §e" + seconds + "s");
                 }
             }
-        }, 0L, 20L).getTaskId(); // läuft jede Sekunde
+        }, 0L, 20L).getTaskId();
     }
 
 
