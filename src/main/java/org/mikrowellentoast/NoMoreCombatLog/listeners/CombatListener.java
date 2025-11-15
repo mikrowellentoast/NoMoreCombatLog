@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Set;
 
 public class CombatListener implements Listener {
 
@@ -29,13 +30,20 @@ public class CombatListener implements Listener {
     private long RETALIATION_WINDOW;
     private int taskId = -1;
 
+
+
     public CombatListener() {
        this.COMBAT_TAG_DURATION = plugin.getConfig().getLong("combat-tag-duration", 15) * 1000;
        this.ENABLED_IN_CREATIVE = plugin.getConfig().getBoolean("enable-in-creative", false);
        this.PLUGIN_ENABLED = plugin.getConfig().getBoolean("enabled", true);
        this.RETALIATION_ONLY = plugin.getConfig().getBoolean("retaliationattack", false);
        this.RETALIATION_WINDOW = plugin.getConfig().getLong("retaliation-window", 10) * 1000;
+
        startActionbarTask();
+    }
+
+    public boolean isCombatTagged(UUID uuid) {
+        return combatTagged.containsKey(uuid);
     }
 
     private static class retaliationdata {
@@ -78,6 +86,7 @@ public class CombatListener implements Listener {
                 if (now - data.timestamp <= RETALIATION_WINDOW) {
                     combatTagged.put(victim.getUniqueId(), now);
                     combatTagged.put(attacker.getUniqueId(), now);
+
                 }
 
                 retaliationMap.remove(victim.getUniqueId());

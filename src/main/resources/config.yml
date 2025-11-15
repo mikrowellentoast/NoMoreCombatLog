@@ -6,3 +6,5 @@ enable-in-creative: false # Whether to enable combat logging in creative mode
 
 retaliationattack: false # Enable combat tag only on retaliation attacks
 retaliationattack-duration: 10 # Duration in seconds for retaliation attack window (only if retaliationattack is true)
+
+allow-portal-teleport: false # Whether to allow teleporting via portals while in combat
