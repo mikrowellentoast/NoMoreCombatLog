@@ -58,3 +58,5 @@ allow-portal-teleport: false     # Allow portals during combat
 | `nomorecombatlog.bypass` | Bypass combat logging            |
 
 ---
+
+More features soon
