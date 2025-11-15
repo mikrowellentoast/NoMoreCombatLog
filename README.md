@@ -5,14 +5,14 @@ A simple and configurable Paper plugin that prevents players from combat logging
 
 ##  Features
 
-### Combat Tag System
-- Players are placed in combat when attacking or being attacked.
+
+-  Players are placed in combat when attacking or being attacked.
 - The combat tag lasts for a configurable duration.
 - Actionbar messages show remaining tag time.
-
-### Combat Logging Prevention
 - If a tagged player logs out before the timer ends, they are automatically killed.
 - Players can be prevented from using portals while in combat.
+- Commands can be blocked during combat.
+- Configurable to allow or disallow tagging in creative mode.
 
 ### Retaliation Mode (optional)
 - Tag only applies if the victim retaliates within a time window.
@@ -40,6 +40,7 @@ retaliationattack: false         # Enable retaliation-based tagging
 retaliation-window: 10           # Time window for retaliation mode
 set-attacker-on-combat: true     # Tag attacker in retaliation mode
 allow-portal-teleport: false     # Allow portals during combat
+blocked-commands: []             # Commands blocked during combat
 ```
 
 ## Commands
@@ -66,4 +67,3 @@ More features soon
 - more punishments for combat logging
 - support for other server types (Spigot)
 - keep track of combat loggers across server restarts
-- Disable usage of specified commands
