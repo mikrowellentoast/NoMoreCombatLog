@@ -68,4 +68,3 @@ More features soon
 - more punishments for combat logging
 - support for other server types (Spigot)
 - keep track of combat loggers across server restarts
-- 
