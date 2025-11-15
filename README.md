@@ -60,3 +60,12 @@ allow-portal-teleport: false     # Allow portals during combat
 ---
 
 More features soon
+
+---
+## TODO
+- Add customizable messages.
+- don't kill players in combat because of server restart
+- more punishments for combat logging
+- support for other server types (Spigot)
+- keep track of combat loggers across server restarts
+- 
