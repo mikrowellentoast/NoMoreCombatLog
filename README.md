@@ -56,3 +56,5 @@ allow-portal-teleport: false     # Allow portals during combat
 | `nomorecombatlog.use`     | Allows use of the `/nmcl` command. |
 | `nomorecombatlog.reload`  | Allows use of the `/nmcl reload` command. |
 | `nomorecombatlog.bypass` | Bypass combat logging            |
+
+---
