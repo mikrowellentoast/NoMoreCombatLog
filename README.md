@@ -48,6 +48,8 @@ blocked-commands: []             # Commands blocked during combat
 | `/nmcl`        | `nomorecombatlog.use`     | Shows the plugin version.        |
 | `/nmcl reload` | `nomorecombatlog.reload`  | Reloads the plugin configuration. |
 
+---
+
 ## Permissions
 | Permission                | Description                      |
 |---------------------------|----------------------------------|
