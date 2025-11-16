@@ -2,6 +2,9 @@ enabled : true # Enable or disable the plugin
 
 combat-tag-duration: 30 # Duration in seconds for how long a player is in combat after being hit or hitting another player
 
+punishment-method: kill # Punishment for combat logging: 'kill' or 'ban'
+ban-duration: 1440 # Duration in minutes for temporary bans (only if punishment-method is 'ban') (1440 minutes = 24 hours) (set to -1 for permanent ban)
+
 enable-in-creative: false # Whether to enable combat logging in creative mode
 
 retaliationattack: false # Enable combat tag only on retaliation attacks
@@ -16,5 +19,5 @@ blocked-commands: #List of commands that are disabled during combat (without sla
   - "warp"
   - "tpa"
 
-punishment-method: kill # Punishment for combat logging: 'kill' or 'ban'
-ban-duration: 1440 # Duration in minutes for temporary bans (only if punishment-method is 'ban') (1440 minutes = 24 hours) (set to -1 for permanent ban)
+disabled-worlds: # List of worlds where combat logging is disabled
+  - "world_the_end"

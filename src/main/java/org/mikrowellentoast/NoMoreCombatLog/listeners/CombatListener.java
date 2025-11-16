@@ -1,6 +1,7 @@
 package org.mikrowellentoast.NoMoreCombatLog.listeners;
 
 import org.bukkit.GameMode;
+import org.bukkit.World;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.mikrowellentoast.NoMoreCombatLog.NoMoreCombatLog;
 
@@ -28,6 +29,9 @@ public class CombatListener implements Listener {
     private boolean SET_ATTACKER_ON_COMBAT_ON_RETALIATION;
     private String punishmentMethod;
     private long banDuration;
+    private List<String> disabled_worlds;
+
+
     private int taskId = -1;
 
 
@@ -41,6 +45,7 @@ public class CombatListener implements Listener {
        this.SET_ATTACKER_ON_COMBAT_ON_RETALIATION = plugin.getConfig().getBoolean("set-attacker-on-combat", true);
        this.punishmentMethod = plugin.getConfig().getString("punishment-method", "kill");
        this.banDuration = plugin.getConfig().getLong("ban-duration", 1440);
+       this.disabled_worlds = plugin.getConfig().getStringList("disabled-worlds");
        startActionbarTask();
     }
 
@@ -65,7 +70,13 @@ public class CombatListener implements Listener {
             return;
         }
 
+
+
         if(!(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Player attacker)) {
+            return;
+        }
+
+        if (disabled_worlds.contains(victim.getWorld().getName()) || disabled_worlds.contains(attacker.getWorld().getName())) {
             return;
         }
 
@@ -153,6 +164,7 @@ public class CombatListener implements Listener {
         this.SET_ATTACKER_ON_COMBAT_ON_RETALIATION = plugin.getConfig().getBoolean("set-attacker-on-combat", true);
         this.punishmentMethod = plugin.getConfig().getString("punishment-method", "kill");
         this.banDuration = plugin.getConfig().getLong("ban-duration", 1440);
+        this.disabled_worlds = plugin.getConfig().getStringList("disabled-worlds");
         startActionbarTask();
     }
 
