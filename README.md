@@ -57,9 +57,6 @@ blocked-commands: []             # Commands blocked during combat
 | `nomorecombatlog.reload`  | Allows use of the `/nmcl reload` command. |
 | `nomorecombatlog.bypass` | Bypass combat logging            |
 
----
-
-More features soon
 
 ---
 ## TODO
