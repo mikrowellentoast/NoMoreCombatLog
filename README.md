@@ -66,5 +66,5 @@ More features soon
 - ~~more punishments for combat logging~~
 - support for other server types (Spigot)
 - keep track of combat loggers across server restarts
-- disabled worlds support
+- ~~disabled worlds support~~
 - ~~disable commands while in combat~~
